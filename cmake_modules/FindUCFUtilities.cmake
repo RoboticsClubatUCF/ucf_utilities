@@ -10,23 +10,23 @@
 
 set(FIND_UCFUTILITIES_PATHS
     ${UCFUTILITIES_ROOT}
-    /usr
-    /usr/local)
+    /usr/local
+    /usr/local/include)
 
 find_path(UCFUTILITIES_INCLUDE_DIRS
           NAMES byte_buffer.h
-          PATHS ${FIND_UCF_UTILITIES_PATHS}
-          PATH_SUFFIXES include)
+          PATHS ${FIND_UCFUTILITIES_PATHS}
+          PATH_SUFFIXES ucf_utilities)
 
 if(NOT UCFUTILITIES_INCLUDE_DIRS)
-    message("Could not find UCFUtilities includes in {FIND_UCFUTILITIES_PATHS}")
+    message("Could not find UCFUtilities includes in ${FIND_UCFUTILITIES_PATHS}")
 endif()
           
 find_library(UCFUTILITIES_LIBS
-             NAMES libucf_utilities libucfutilities
+             NAMES ucfutilities libucfutilities
              PATHS ${FIND_UCFUTILITIES_PATHS}
              PATH_SUFFIXES lib)
 
 if(NOT UCFUTILITIES_LIBS)
-    message("Could not find UCFUtilities libs in {FIND_UCFUTILITIES_PATHS}")
+    message("Could not find UCFUtilities libs in ${FIND_UCFUTILITIES_PATHS}")
 endif()
