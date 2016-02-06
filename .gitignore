@@ -1,4 +1,4 @@
-ed exclusively for build results
+# Used exclusively for build results
 build/
 bin/
 devel/
@@ -15,3 +15,4 @@ CMakeLists.txt.user
 
 # clion/intellij project stuff
 .idea/
+
