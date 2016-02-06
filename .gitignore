@@ -1,0 +1,17 @@
+ed exclusively for build results
+build/
+bin/
+devel/
+lib/
+msg_gen/
+srv_gen/
+
+# eclipse project files
+.project
+.cproject
+
+# qtcreator generated files
+CMakeLists.txt.user
+
+# clion/intellij project stuff
+.idea/
