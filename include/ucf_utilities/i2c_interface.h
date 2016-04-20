@@ -62,6 +62,19 @@ public:
     //////////////////////////////////////////////////////////////////////////////// 
     ByteBuffer readSuccessiveRegisters(int reg, int size, int count) const;
 
+    ////////////////////////////////////////////////////////////////////////////////
+    /// \brief Read a bulk set of data from the slave device.
+    ///
+    /// Support for bulk reads from devices that support their own internal
+    /// automatically incrementing register pointers.  Reads the number of bytes
+    /// supplied from the register given as a starting point.  It is the caller's
+    /// responsibility to then parse and sort this data.
+    ///
+    /// \param reg    The register address to start the read from.
+    /// \param count  The number of bytes to read.
+    ////////////////////////////////////////////////////////////////////////////////
+    ByteBuffer readBulkBytes(int reg, int count) const;
+
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Write a single byte to the specified register.
     ///

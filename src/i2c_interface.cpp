@@ -90,9 +90,30 @@ ByteBuffer I2C_Interface::readSuccessiveRegisters(int reg, int size, int count) 
     return return_buffer;
 }
 
+ByteBuffer I2C_Interface::readBulkBytes(int reg, int count) const
+{
+    ByteBuffer return_buffer;
+
+    char* temp_buffer = new char[count];
+    int read_count = read(file_, temp_buffer, count);
+    if (read_count != count)
+    {
+        printf("I2C bulk read does not match expected count\n");
+    }
+
+    for (int i = 0; i < read_count; i++)
+    {
+        return_buffer.appendByte(temp_buffer[i]);
+    }
+
+    delete [] temp_buffer;
+
+    return return_buffer;
+}
+
 void I2C_Interface::writeRegisterByte(int reg, char data) const
 {
-    char temp_buffer[2] = {reg, data};
+    char temp_buffer[2] = {(char)reg, data};
     int write_count = write(file_, temp_buffer, 2);
     if (write_count != 2)
     {

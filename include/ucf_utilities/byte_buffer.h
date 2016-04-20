@@ -18,11 +18,18 @@ public:
     ByteBuffer();
 
     //////////////////////////////////////////////////////////////////////////////// 
+    /// \brief ByteBuffer constructor creating a new buffer of the specified size.
+    ///
+    /// \param size    The size of the intial buffer to create.
+    //////////////////////////////////////////////////////////////////////////////// 
+    ByteBuffer(int size);
+
+    //////////////////////////////////////////////////////////////////////////////// 
     /// \brief ByteBuffer constructor for building from an existing char vector.
     ///
     /// \param data    The vector to use initialize the ByteBuffer from.
     //////////////////////////////////////////////////////////////////////////////// 
-    ByteBuffer(std::vector<char> data);
+    ByteBuffer(std::vector<unsigned char> data);
     
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Default ByteBuffer destructor.
@@ -35,21 +42,21 @@ public:
     ///
     /// Supports indexed access to the underlying ByteBuffer storage. 
     //////////////////////////////////////////////////////////////////////////////// 
-    char operator[](const int index);
+    unsigned char operator[](const int index);
 
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Appends a single byte to the ByteBuffer.
     ///
     /// \param data    The byte to be appended to the ByteBuffer.
     //////////////////////////////////////////////////////////////////////////////// 
-    void appendByte(char data);
+    void appendByte(unsigned char data);
 
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Places a single byte at the beginning of the ByteBuffer.
     ///
     /// \param data    The byte to be placed at the beginning of the ByteBuffer.
     //////////////////////////////////////////////////////////////////////////////// 
-    void prependByte(char data);
+    void prependByte(unsigned char data);
 
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Appends another entire ByteBuffer to this ByteBuffer.
@@ -62,13 +69,13 @@ public:
     /// \brief View the first byte in the ByteBuffer without altering the contents.
     ///
     //////////////////////////////////////////////////////////////////////////////// 
-    char peekNextByte() const;
+    unsigned char peekNextByte() const;
 
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Retrieve and remove the first byte in the ByteBuffer.
     ///
     /// \return The first byte in the ByteBuffer.
-    char removeNextByte();
+    unsigned char removeNextByte();
 
     //////////////////////////////////////////////////////////////////////////////// 
     /// \brief Empty out the contents of the ByteBuffer.
@@ -101,9 +108,9 @@ public:
     ///
     /// \return Pointer to a C-style array of the data with char elements.
     //////////////////////////////////////////////////////////////////////////////// 
-    const char* getDataPointer() const;
+    const unsigned char* getDataPointer() const;
 private:
-    std::vector<char> buffer;
+    std::vector<unsigned char> buffer;
 };
 
 #endif
