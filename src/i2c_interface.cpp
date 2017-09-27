@@ -36,6 +36,7 @@ void I2C_Interface::openDevice()
     if((ioctl(file_, I2C_SLAVE, address_)) < 0)
     {
         printf("Unable to connect to device\n");
+        throw I2CException(bus_number_);
     }
 }
 
@@ -56,6 +57,7 @@ ByteBuffer I2C_Interface::readRegister(int reg, int size) const
     if ((write(file_, temp_buffer, 1)) != 1)
     {
         printf("I2C device failed to write new read address\n");
+        throw I2CException(bus_number_);
     }
 
     // Read the data from the device.
@@ -63,6 +65,7 @@ ByteBuffer I2C_Interface::readRegister(int reg, int size) const
     if (read_count != size)
     {
         printf("I2C bytes read does not match expected size\n");
+        throw I2CException(bus_number_);
     }
 
     // Add all read bytes into the return structure.
@@ -99,6 +102,7 @@ ByteBuffer I2C_Interface::readBulkBytes(int reg, int count) const
     if (read_count != count)
     {
         printf("I2C bulk read does not match expected count\n");
+        throw I2CException(bus_number_);
     }
 
     for (int i = 0; i < read_count; i++)
@@ -118,6 +122,7 @@ void I2C_Interface::writeRegisterByte(int reg, char data) const
     if (write_count != 2)
     {
         printf("I2C bytes written does not match expected size\n");
+        throw I2CException(bus_number_);
     }
 }
 
@@ -129,6 +134,7 @@ void I2C_Interface::writeRegisterByteBuffer(int reg, ByteBuffer buffer) const
     if (write_count != buffer.getSize())
     {
         printf("I2C bytes written does not match expected size\n");
+        throw I2CException(bus_number_);
     }
     // Remove the register address that was added for communication.
     buffer.removeNextByte();
@@ -140,6 +146,7 @@ void I2C_Interface::writeByteBuffer(ByteBuffer buffer) const
     if (write_count != buffer.getSize())
     {
         printf("I2C bytes written does not match expected size\n");
+        throw I2CException(bus_number_);
     }
 }
 

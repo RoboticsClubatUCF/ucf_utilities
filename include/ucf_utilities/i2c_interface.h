@@ -2,6 +2,10 @@
 #define I2C_Interface_H
 
 #include <byte_buffer.h>
+#include <exception>
+#include <stdexcept>
+
+using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////
 /// \brief Class providing functionality for interfacing to an I2C bus.
@@ -110,4 +114,25 @@ private:
     int bus_number_;
 };
 
+class I2CException: public runtime_error{
+public:
+    I2CException(int bus)
+        : runtime_error("I2C exception"), busNum(bus)
+        {}
+
+    virtual const char* what() const throw()
+    {
+        convert.str("");
+
+        convert << "I2C exception on bus number: " << busNum;
+        
+        return convert.str().c_str();
+    }
+
+private:
+    int busNum;
+    static ostringstream convert;
+};
+
+ostringstream I2CException::convert;
 #endif
