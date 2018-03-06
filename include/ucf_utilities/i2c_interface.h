@@ -4,6 +4,7 @@
 #include <byte_buffer.h>
 #include <exception>
 #include <stdexcept>
+#include <sstream>
 
 using namespace std;
 
